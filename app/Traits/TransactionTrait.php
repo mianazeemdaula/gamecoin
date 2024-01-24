@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use App\Models\Wallet;
 
 trait TransactionTrait
 {
