@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/nowpayments/ipn', [App\Http\Controllers\Api\PaymentHooksController::class, 'handleNowPaymentsIPN']);
+Route::post('/nowpayments/ipn', [App\Http\Controllers\API\PaymentHooksController::class, 'handleNowPaymentsIPN']);
