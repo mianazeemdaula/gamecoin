@@ -46,6 +46,8 @@ class PaymentHooksController extends Controller
                 $txDeposit =  Wallet::where('tx_id', $payment_id)->first();
                 if($data && !$txDeposit && ($data['payment_status'] == 'finished' || $data['payment_status'] == 'partially_paid')){
                     $invoice = Invoice::where('invoice_id', $payment_id)->first();
+                    Log::info($invoice);
+                    Log::info($data);
                     if($invoice){
                         $amount = $data['actually_paid'] ??  $data['pay_amount'];
                         $extradata = [
