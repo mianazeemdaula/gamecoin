@@ -53,7 +53,7 @@ class PaymentHooksController extends Controller
                         'tx_amount' => $amount,
                         'tx_currency' => $data['pay_currency'],
                     ];
-                    $user->updateBalance($wallet->amount, 'Deposit from Crypto', $extradata);
+                    $user->updateBalance($amount, 'Deposit from Crypto', $extradata);
                 }
             }
             DB::commit();
