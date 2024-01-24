@@ -47,6 +47,7 @@ class PaymentHooksController extends Controller
                 if($data && !$txDeposit && ($data['payment_status'] == 'finished' || $data['payment_status'] == 'partially_paid')){
                 
                     $amount = $data['actually_paid'] ??  $data['pay_amount'];
+                    $user = User::find($data['order_id']);
                     $extradata = [
                         'tx_id' => $payment_id,
                         'tx_amount' => $amount,
