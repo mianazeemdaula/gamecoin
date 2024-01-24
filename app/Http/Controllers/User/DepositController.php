@@ -61,7 +61,7 @@ class DepositController extends Controller
             $invoice->invoice_id = $payment['payment_id'];
             $invoice->payload = json_encode($payment);
             $invoice->save();
-            return redirect()->route('user.deposit.crypto.status', $invoice->invoice_id);
+            return redirect()->route('user.deposit.show', $invoice->invoice_id);
         }
         return redirect()->back()->withInput()->withErrors(['error' => $payment['message']]);
     }
@@ -74,7 +74,7 @@ class DepositController extends Controller
         $invoice = Invoice::where('invoice_id', $id)->first();
         // $payment = (new NowPayment())->getPayment($id);
         $payment = json_decode($invoice->payload, true);
-        return view('user.deposit.show', compact('invoice', 'payment'));
+        return view('user.deposit.crypto_status', compact('invoice', 'payment'));
     }
 
     /**
