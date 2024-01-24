@@ -45,19 +45,14 @@ class PaymentHooksController extends Controller
                 $data = (new NowPayment())->getPayment($payment_id);
                 $txDeposit =  Wallet::where('tx_id', $payment_id)->first();
                 if($data && !$txDeposit && ($data['payment_status'] == 'finished' || $data['payment_status'] == 'partially_paid')){
-                    $invoice = Invoice::where('invoice_id', $payment_id)->first();
-                    Log::info($invoice);
-                    Log::info($data);
-                    if($invoice){
-                        $amount = $data['actually_paid'] ??  $data['pay_amount'];
-                        $extradata = [
-                            'tx_id' => $payment_id,
-                            'tx_amount' => $amount,
-                            'tx_currency' => $data['pay_currency'],
-                        ];
-                        $user->updateBalance($wallet->amount, 'Deposit from Crypto', $extradata);
-                        $invoice->delete();
-                    }
+                
+                    $amount = $data['actually_paid'] ??  $data['pay_amount'];
+                    $extradata = [
+                        'tx_id' => $payment_id,
+                        'tx_amount' => $amount,
+                        'tx_currency' => $data['pay_currency'],
+                    ];
+                    $user->updateBalance($wallet->amount, 'Deposit from Crypto', $extradata);
                 }
             }
             DB::commit();
