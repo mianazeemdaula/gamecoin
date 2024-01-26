@@ -62,4 +62,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(GamePackage::class);
     }
+
+    // count of trades if buyer_id and game_pacage_id associate to user
+
+    public function trades()
+    {
+        return $this->hasMany(Trade::class);
+    }
+
+    public function sellTrades()
+    {
+        return $this->hasMany(Trade::class, 'seller_id');
+    }
+
 }

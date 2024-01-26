@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Trade extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'seller_id',
+        'game_package_id',
+        'end_time',
+        'status',
+    ];
 }

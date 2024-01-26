@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('game_packge_id')->constrained('game_packages');
-            $table->foreignId('payment_method_id')->constrained('payment_methods');
+            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('game_package_id')->constrained('game_packages');
             $table->dateTime('end_time');
             $table->string('status',15);
             $table->timestamps();

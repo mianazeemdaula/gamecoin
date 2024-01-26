@@ -1,7 +1,6 @@
 @extends('layouts.web')
 @section('content')
     <div class="bg-gray-800 h-52">
-
     </div>
     <div class="mx-20 my-4">
         <div class="shadow-sm flex rounded-sm">
@@ -15,14 +14,14 @@
                     </div>
                     <div class="flex-auto">
                         <div class="flex items-start space-x-2">
-                            <div class="text-orange-500 font-medium">{{ $item->user->name ?? 'Name' }}</div>
+                            <div class="text-orange-500 font-medium">{{ $package->user->name ?? 'Name' }}</div>
                             <div class="flex mt-1 items-center space-x-2">
                                 <div><i class="fas fa-thumbs-up text-green-500"></i></div>
                                 <div class="text-xs">70.5%</div>
                             </div>
                         </div>
                         <div class="flex space-x-2 text-sm text-gray-500 mt-1">
-                            <div>877 orders</div>
+                            <div>{{ $package->user->trade_count ?? 0 }} orders</div>
                             <div class="border-r"></div>
                             <div>100.00% completion</div>
                         </div>
@@ -30,7 +29,7 @@
                 </div>
                 <div class="flex justify-between mt-8">
                     <div class="flex flex-col items-center">
-                        <div class="text-sm">15 Minutes</div>
+                        <div class="text-sm">{{ $package->gameAsset->game->trade_time }} Minutes</div>
                         <div class="text-gray-500 text-xs">Delivery Time</div>
                     </div>
                     <div class="flex flex-col items-center">
@@ -38,8 +37,8 @@
                         <div class="text-gray-500 text-xs">Avg. Release Time</div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="text-sm">8,008</div>
-                        <div class="text-gray-500 text-xs">Available</div>
+                        <div class="text-sm">{{ $package->qty_symbol }}</div>
+                        <div class="text-gray-500 text-xs">Package</div>
                     </div>
                 </div>
                 <div class="mt-8">
@@ -49,13 +48,14 @@
             </div>
             <div class="p-4 flex-auto">
                 {{-- <livewire:cashToCoin /> --}}
-                <div class="grid grid-cols-5 gap-3">
-                    @foreach ($packages as $package)
-                    <div class="bg-orange-200 items-center flex flex-col p-2 rounded hover:bg-orange-300">
-                        <div class="text-xs">{{ $package->qty }}{{ $package->qty_sybmol}}</div>
-                        <div class="text-sm">${{ $package->price ?? '0.00' }}</div>
-                    </div>    
-                    @endforeach
+                <div class="">
+                    <div class="text-gray-400">{{ $item->gameAsset->name ?? 'Asset Name' }}</div>
+                    <div>{{ $item->qty ?? 0 }} - {{ $item->qty ?? 0 }}</div>
+                    <form action="{{ route('user.trade.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="package" value="{{ $package->id }}">
+                        <button type="submit" class="bg-orange-500 px-4 py-1 rounded-md text-white text-sm w-full">Buy Coins</a>
+                    </form>
                 </div>
             </div>
         </div>

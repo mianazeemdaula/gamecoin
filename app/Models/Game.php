@@ -19,4 +19,9 @@ class Game extends Model
         'ios_url',
         'is_active',
     ];
+
+    public function gameAssets()
+    {
+        return $this->hasMany(GameAsset::class);
+    }
 }

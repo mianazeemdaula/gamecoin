@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string("slug")->unique();
             $table->text('description');
             $table->string("image")->nullable();
             $table->string("thumbnail")->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string("android_url")->nullable();
             $table->string("ios_url")->nullable();
             $table->boolean("is_active")->default(true);
+            $table->unsignedInteger("trade_time")->default(15);
             $table->timestamps();
         });
     }

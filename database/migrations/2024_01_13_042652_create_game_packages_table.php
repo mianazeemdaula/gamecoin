@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->string("image")->nullable();
-            $table->unsignedInteger('qty');
-            $table->char('qty_sybmol', 1)->default('k');
+            $table->unsignedBigInteger('qty');
             $table->float('price', 8, 2);
             $table->float('offer_price', 8, 2);
             $table->boolean('is_active')->default(1);

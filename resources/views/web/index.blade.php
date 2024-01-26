@@ -1,21 +1,23 @@
 @extends('layouts.web')
 @section('content')
-<header class="bg-blue-500 text-white py-4">
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-bold">Your Logo / Brand</h1>
-    </div>
-</header>
+    <div class="bg-gray-800 h-52">
 
-<!-- Navigation Menu -->
-<nav class="bg-gray-800 text-white">
-    <div class="container mx-auto">
-        <ul class="flex justify-end space-x-4 py-2">
-            <li><a href="#" class="hover:text-gray-300">Home</a></li>
-            <li><a href="#" class="hover:text-gray-300">About</a></li>
-            <li><a href="#" class="hover:text-gray-300">Services</a></li>
-            <li><a href="#" class="hover:text-gray-300">Contact</a></li>
-        </ul>
     </div>
-</nav>
-
+    <div class="mx-20 my-4">
+        <div class="shadow-sm flex rounded-sm">
+            <div class="w-8/12 bg-gray-50 p-4">
+                <div class="grid grid-cols-4 gap-4">
+                    @foreach ($games as $item)
+                    <a href="{{ url("/game/$item->slug") }}">
+                        <img class="w-full object-cover" src="https://random.imagecdn.app/150/150" alt="" srcset="">
+                        <div class="text-center p-2 bg-gray-100">{{ $item->name }}</div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="p-4 flex-auto">
+                
+            </div>
+        </div>
+    </div>
 @endsection

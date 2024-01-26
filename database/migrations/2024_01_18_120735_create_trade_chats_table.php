@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('trade_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
             $table->text('message');
-            $table->string('media_url');
+            $table->string('media_url')->nullable();
             $table->boolean('is_read')->default(0);
             $table->timestamps();
         });

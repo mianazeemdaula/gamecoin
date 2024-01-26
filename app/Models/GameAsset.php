@@ -17,4 +17,9 @@ class GameAsset extends Model
         'thumbnail',
         'is_active',
     ];
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
 }

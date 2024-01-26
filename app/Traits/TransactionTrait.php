@@ -34,7 +34,6 @@ trait TransactionTrait
         foreach($meta as $key => $value){
             $transaction->{$key} = $value;
         }
-
         // Associate the transaction with the user
         $this->transactions()->save($transaction);
     }
