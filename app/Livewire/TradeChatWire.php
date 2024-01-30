@@ -13,7 +13,11 @@ class TradeChatWire extends Component
     public $message;
     public $trade;
 
-    protected $listeners = ["echo:trade-chat.2,TradeChatNewMessageEvent" => 'newMessageUpdate'];
+    public function getListeners(){
+        return [
+            "echo-private:trade-chat.{$this->trade->id},TradeChatNewMessageEvent" => 'newMessageUpdate',
+        ];
+    }
 
     public function mount($trade)
     {
@@ -42,6 +46,7 @@ class TradeChatWire extends Component
     public function newMessageUpdate($data)
     {
         $msg = TradeChat::find($data['message']['id']);
+        $this->dispatch('scroll-bottom');
         $this->messages->push($msg);
     }
 }

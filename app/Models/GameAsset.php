@@ -22,4 +22,9 @@ class GameAsset extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    public function packages()
+    {
+        return $this->hasMany(GamePackage::class, 'game_asset_id', 'id');
+    }
 }

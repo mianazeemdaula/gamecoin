@@ -26,9 +26,9 @@ class GamePackage extends Model
     ];
     
 
-    public function gameAsset()
+    public function asset()
     {
-        return $this->belongsTo(GameAsset::class);
+        return $this->belongsTo(GameAsset::class, 'game_asset_id', 'id');
     }
 
     public function user()

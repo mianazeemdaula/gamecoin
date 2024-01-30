@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="flex items-center justify-center space-x-1">
-            @foreach ($game->gameAssets as $item)
+            @foreach ($game->assets as $item)
                 <a href="{{ url("/game/$game->slug/$item->id") }}">
                     <div class="{{$item->id == $asset->id ? "bg-orange-300" : "bg-orange-200"}}  py-1 rounded-sm px-4 hover:bg-orange-300">
                         {{ $item->name }}
@@ -60,7 +60,7 @@
                     <div class="flex-auto">
                         <div class="flex space-x-4">
                             @foreach ($user->gamePackages()->where('game_asset_id', $asset->id)->orderBy('qty')->get() as $item)
-                                <a href="{{ url("trade/$item->id") }}">
+                                <a href="{{ url("game/".$item->asset->game->slug."/".$item->asset->slug."/".$item->id) }}">
                                     <div class="p-1 bg-orange-200 rounded-sm">
                                         <div class="text-xs">{{ $item->qty_symbol }}</div>
                                         <div class="text-sm">${{ $item->price }}</div>

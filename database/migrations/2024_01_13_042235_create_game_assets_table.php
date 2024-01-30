@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('game_id')->constrained('games');
             $table->string('name');
-            // $table->string("slug")->unique();
+            $table->string("slug");
             $table->text('description');
             $table->string("image")->nullable();
             $table->string("thumbnail")->nullable();
             $table->boolean('is_active');
             $table->timestamps();
+            $table->unique(['game_id', 'slug']);
         });
     }
 

@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreignId('seller_id')->constrained('users');
             $table->foreignId('game_package_id')->constrained('game_packages');
             $table->dateTime('end_time');
+            $table->unsignedBigInteger('quantity');
+            $table->float('price', 8, 2);
+            $table->dateTime('seller_confirmed_at')->nullable();
+            $table->dateTime('buyer_confirmed_at')->nullable();
             $table->string('status',15);
             $table->timestamps();
         });

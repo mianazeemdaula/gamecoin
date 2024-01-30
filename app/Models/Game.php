@@ -20,8 +20,8 @@ class Game extends Model
         'is_active',
     ];
 
-    public function gameAssets()
+    public function assets()
     {
-        return $this->hasMany(GameAsset::class);
+        return $this->hasMany(GameAsset::class, 'game_id', 'id');
     }
 }

@@ -31,7 +31,7 @@ class TradeChatNewMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('trade-chat.' . $this->message->trade_id),
+            new PrivateChannel('trade-chat.' . $this->message->trade_id),
         ];
     }
 }

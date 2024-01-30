@@ -29,7 +29,7 @@
                 </div>
                 <div class="flex justify-between mt-8">
                     <div class="flex flex-col items-center">
-                        <div class="text-sm">{{ $package->gameAsset->game->trade_time }} Minutes</div>
+                        <div class="text-sm">{{ $package->asset->game->trade_time }} Minutes</div>
                         <div class="text-gray-500 text-xs">Delivery Time</div>
                     </div>
                     <div class="flex flex-col items-center">
@@ -49,9 +49,10 @@
             <div class="p-4 flex-auto">
                 {{-- <livewire:cashToCoin /> --}}
                 <div class="">
-                    <div class="text-gray-400">{{ $item->gameAsset->name ?? 'Asset Name' }}</div>
-                    <div>{{ $item->qty ?? 0 }} - {{ $item->qty ?? 0 }}</div>
-                    <form action="{{ route('user.trade.store') }}" method="post">
+                    <div class="text-gray-600 text-lg">{{ $package->asset->game->name ?? 'Asset Name' }}</div>
+                    <div class="bg-gray-200 p-2 rounded-lg mt-2">{{ $package->asset->name ?? 'Asset Name' }}</div>
+                    <div class="mt-6">{{ $package->qty_symbol ?? 0 }}  for  ${{ $package->price ?? 0 }}</div>
+                    <form action="{{ route('user.trade.store') }}" method="post" class="mt-6">
                         @csrf
                         <input type="hidden" name="package" value="{{ $package->id }}">
                         <button type="submit" class="bg-orange-500 px-4 py-1 rounded-md text-white text-sm w-full">Buy Coins</a>

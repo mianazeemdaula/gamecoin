@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('trade-chat.{tradeId}',function ($user, $tradeId){
+    $trade = \App\Models\Trade::find($tradeId);
+    return $trade->user_id === $user->id || $trade->seller_id === $user->id;
+});

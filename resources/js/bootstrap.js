@@ -31,3 +31,9 @@ window.Echo.connector.ably.connection.on(stateChange => {
         console.log('connected to ably server');
     }
 });
+
+// window.Echo.private('trade-chat.2').listen('TradeChatNewMessageEvent', e => {
+//     console.log(e);
+// }).error(e => {
+//     console.log(e);
+// });

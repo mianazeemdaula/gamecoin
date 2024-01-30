@@ -43,13 +43,13 @@ class PaymentHooksController extends Controller
             $payment_id = $request->input('payment_id');
             if($payment_id){
                 $data = (new NowPayment())->getPayment($payment_id);
-                $txDeposit =  Wallet::where('tx_id', $payment_id)->first();
+                $txDeposit =  Wallet::where('tx_id',"de_".$payment_id)->first();
                 if($data && !$txDeposit && ($data['payment_status'] == 'finished' || $data['payment_status'] == 'partially_paid')){
                 
                     $amount = $data['actually_paid'] ??  $data['pay_amount'];
                     $user = User::find($data['order_id']);
                     $extradata = [
-                        'tx_id' => $payment_id,
+                        'tx_id' => "de_".$payment_id,
                         'tx_amount' => $amount,
                         'tx_currency' => $data['pay_currency'],
                     ];

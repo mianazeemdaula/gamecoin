@@ -14,6 +14,23 @@ class Trade extends Model
         'seller_id',
         'game_package_id',
         'end_time',
+        'quantity',
+        'price',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(GamePackage::class, 'game_package_id');
+    }
 }

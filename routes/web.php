@@ -19,15 +19,15 @@ Route::get('/', function () {
 });
 
 Route::get('/game/{game}/{asset?}', function ($game, $asset = null) {
-    $game = App\Models\Game::with(['gameAssets'])->where('slug', $game)->first();
-    $asset = $asset ? $game->gameAssets()->where('id', $asset)->first() : $game->gameAssets->first();
+    $game = App\Models\Game::with(['assets'])->where('slug', $game)->first();
+    $asset = $asset ? $game->assets()->where('id', $asset)->first() : $game->assets->first();
     $users = App\Models\User::whereHas('gamePackages', function($q) use($asset) {
         $q->where('game_asset_id', $asset->id);
     })->paginate();
     return view('web.trade.seller', compact('game', 'users', 'asset'));
 });
 
-Route::get('/trade/{id}', function ($id) {
+Route::get('/game/{game}/{asset}/{id}', function ($game, $asset, $id) {
     $package = App\Models\GamePackage::findOrFail($id);
     return view('user.trade.buy', compact('package'));
 });
@@ -51,5 +51,6 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/', [\App\Http\Controllers\WebController::class, 'dashboard'])->name('dashboard');
         Route::resource('deposit', \App\Http\Controllers\User\DepositController::class);
         Route::resource('trade', \App\Http\Controllers\User\TradeController::class);
+        Route::resource('game', \App\Http\Controllers\User\GameController::class);
     });
 });

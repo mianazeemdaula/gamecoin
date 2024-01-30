@@ -19,15 +19,17 @@ class TradeController extends Controller
         $trade = $user->trades()->create([
             'game_package_id' => $package->id,
             'seller_id' => $package->user_id,
-            'end_time' => now()->addMinutes($package->gameAsset->game->trade_time),
+            'end_time' => now()->addMinutes($package->asset->game->trade_time),
             'status' => 'pending',
+            'quantity' => $package->qty,
+            'price' => $package->price,
         ]);
         $extradata = [
-            'tx_id' => '001',
+            'tx_id' => 'tr_'.$trade->id,
             'tx_amount' => $package->price,
-            'tx_currency' => 'usd',
+            'tx_currency' => 'USD',
         ];
-        $user->updateBalance($package->price , "Hold for trade $trade->id", $extradata);
+        $user->updateBalance($package->price , "Deducted for trade# $trade->id", $extradata);
         return redirect()->route('user.trade.show', $trade->id);
     }
 
@@ -35,6 +37,13 @@ class TradeController extends Controller
     {
         $trade = Trade::findOrFail($id);
         return view('user.trade.show', compact('trade'));
+    }
+
+    public function update(Request $request, string $id){
+        $request->validate([
+            'status' => 'required|in:buyer_notify,seller_notiy'
+        ]);
+        Trade::findOrFail($id);
     }
     
 }
